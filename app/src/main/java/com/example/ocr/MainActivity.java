@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private Uri imageUri;
+    private ImageView imageCamera;
     private ActivityResultLauncher<Intent> prendrePhotoLauncher;
 
     @Override
@@ -36,13 +38,12 @@ public class MainActivity extends AppCompatActivity {
                 result -> {
                     Log.d(TAG, "ActivityResultCallback");
                     if (result.getResultCode() == RESULT_OK) {
-                        // L'image a été capturée et peut être traitée ici
-                        // Utilisez l'Uri de l'image (imageUri) pour accéder au fichier
+                        afficherImageCapturee();
                         Log.d(TAG, "Résultat OK");
                     }
                 }
         );
-
+        imageCamera = findViewById(R.id.ImageCamera);
         findViewById(R.id.buttonOpenCamera).setOnClickListener(openCameraClickListener);
     }
 
@@ -93,4 +94,13 @@ public class MainActivity extends AppCompatActivity {
         );
         return imageFile;
     }
+    private void afficherImageCapturee() {
+        if (imageUri != null) {
+            Log.d(TAG, "Affichage de l'image capturée. URI : " + imageUri.toString());
+            imageCamera.setImageURI(imageUri);
+        } else {
+            Log.e(TAG, "L'URI de l'image est null");
+        }
+    }
+
 }
