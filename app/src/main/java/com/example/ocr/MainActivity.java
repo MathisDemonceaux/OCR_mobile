@@ -25,8 +25,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.Text;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private String[] stockagePermissions;
 
     private ProgressDialog progressDialog;
+    private TextRecognizer textRecognizer;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -67,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Chargement");
         progressDialog.setCanceledOnTouchOutside(false);
+
+        textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
         imageEntree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +87,48 @@ public class MainActivity extends AppCompatActivity {
                 voirListeChoix();
             }
         });
+
+        lireImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(imageUri == null){
+                    Toast.makeText(MainActivity.this, "Veuillez selectionner une image", Toast.LENGTH_SHORT).show();
+                }else{
+                    lireImage();
+                }
+            }
+        });
+    }
+
+    private void lireImage() {
+        progressDialog.setMessage("Perparation Image...");
+        progressDialog.show();
+
+        try {
+            InputImage imageEntree = InputImage.fromFilePath(this, imageUri);
+            progressDialog.setMessage("Lecture...");
+
+            Task<Text> textTaskResult = textRecognizer.process(imageEntree).addOnSuccessListener(new OnSuccessListener<Text>() {
+                @Override
+                public void onSuccess(Text text) {
+                    progressDialog.dismiss();
+                    String result = text.getText();
+                    texteReconnue.setText(result);
+
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(MainActivity.this, "Lecture echouée" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            Toast.makeText(this, "Lecture échouée" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void voirListeChoix() {
@@ -168,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, "Annulée", Toast.LENGTH_SHORT).show();
                 }
             }
-
+            break;
             case STORAGE_REQUEST_CODE:{
                 if(grantResults.length>0){
                     boolean stockagePermission = grantResults[0] == PackageManager.PERMISSION_GRANTED;
@@ -181,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, "Annulée", Toast.LENGTH_SHORT).show();
                 }
             }
+            break;
         }
 
     }
