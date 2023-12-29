@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/inputImageBtn"
+            android:id="@+id/imageEntree"
             android:text="Prendre Photo"
             app:cornerRadius="5dp"
             android:layout_marginEnd="5dp"
@@ -22,6 +22,7 @@
             android:layout_height="match_parent"/>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/lireImage"
             android:layout_width="match_parent"
             app:cornerRadius="5dp"
             android:layout_marginStart="5dp"
