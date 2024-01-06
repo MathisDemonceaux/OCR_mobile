@@ -17,48 +17,27 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/TextAppearance.MaterialComponents.Headline6"
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Magasin :"/>
-
-            <EditText
-                android:id="@+id/magasinReconnue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"/>
-
-            <TextView
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Total  :"/>
-
-            <EditText
-                android:id="@+id/total"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"/>
-
-
+                android:src="@drawable/baseline_image_24"
+                android:adjustViewBounds="true"
+                app:strokeWidth="2dp"/>
 
             <TextView
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Teste trouvé dans l'image  :"/>
+                android:text="l'image est de type : "/>
 
             <EditText
-                android:id="@+id/texte"
+                android:id="@+id/imageType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"/>
 
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

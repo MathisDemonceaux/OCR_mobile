@@ -27,6 +27,9 @@
         </activity>
         <activity android:name=".PageAnalyse">
             </activity>
+        <activity android:name=".PageEtiquette">
+
+        </activity>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.ocr.fileprovider"

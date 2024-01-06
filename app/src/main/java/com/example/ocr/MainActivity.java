@@ -1,11 +1,14 @@
 package com.example.ocr;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,6 +18,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Toast;
+import java.util.Arrays;
+
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -42,9 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     private MaterialButton imageEntree;
     private MaterialButton lireImage;
-    private MaterialButton pageAnalyse;
+    private MaterialButton labeliserImage;
     private ShapeableImageView imagePrise;
-    private EditText texteReconnue;
 
     private static final String TAG = "Main_TAG";
     private Uri imageUri = null;
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     private TextRecognizer textRecognizer;
+    @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -64,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
         imageEntree = findViewById(R.id.imageEntree);
         lireImage = findViewById(R.id.lireImage);
         imagePrise = findViewById(R.id.imagePrise);
-        texteReconnue = findViewById(R.id.texteReconnue);
-        pageAnalyse = findViewById(R.id.pageAnalyse);
+        labeliserImage = findViewById(R.id.labeliserImage);
 
         //init liste
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -102,18 +106,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        pageAnalyse.setOnClickListener(new View.OnClickListener() {
+        labeliserImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(texteReconnue.getText().toString().isEmpty()){
-                    Toast.makeText(MainActivity.this, "Veuillez lire l'image", Toast.LENGTH_SHORT).show();
+                if(imageUri == null){
+                    Toast.makeText(MainActivity.this, "Veuillez selectionner une image", Toast.LENGTH_SHORT).show();
                 }else{
-                    Log.d(TAG, "onClick: page analyse");
-                    Intent intent = new Intent(MainActivity.this, PageAnalyse.class);
-                    intent.putExtra("texte", texteReconnue.getText().toString());
+                    Intent intent = new Intent(MainActivity.this, PageEtiquette.class);
+                    intent.putExtra("imageUri", imageUri);
                     startActivity(intent);
-
                 }
+
             }
         });
     }
@@ -131,7 +134,10 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(Text text) {
                     progressDialog.dismiss();
                     String result = text.getText();
-                    texteReconnue.setText(result);
+                    Log.d(TAG, "onClick: page analyse");
+                    Intent intent = new Intent(MainActivity.this, PageAnalyse.class);
+                    intent.putExtra("texte", result);
+                    startActivity(intent);
 
                 }
             })

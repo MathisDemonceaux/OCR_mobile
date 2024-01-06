@@ -27,16 +27,16 @@
             app:cornerRadius="5dp"
             android:layout_marginStart="5dp"
             android:layout_weight="1"
-            android:text="Lire Image"
+            android:text="Lire Ticket Caisse"
             android:layout_height="match_parent"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/pageAnalyse"
+            android:id="@+id/labeliserImage"
             android:layout_width="match_parent"
             app:cornerRadius="5dp"
             android:layout_marginStart="5dp"
             android:layout_weight="1"
-            android:text="Page d'analyse"
+            android:text="Labeliser Image"
             android:layout_height="match_parent"/>
     </LinearLayout>
 
@@ -57,20 +57,6 @@
                 android:adjustViewBounds="true"
                 app:strokeWidth="2dp"/>
             
-            <TextView
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Texte trouvé dans l'image"/>
-
-            <EditText
-                android:id="@+id/texteReconnue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"/>
-            
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>
