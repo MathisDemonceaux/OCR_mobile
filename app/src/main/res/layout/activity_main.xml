@@ -29,6 +29,15 @@
             android:layout_weight="1"
             android:text="Lire Image"
             android:layout_height="match_parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pageAnalyse"
+            android:layout_width="match_parent"
+            app:cornerRadius="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:text="Page d'analyse"
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
     <ScrollView

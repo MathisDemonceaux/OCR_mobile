@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private MaterialButton imageEntree;
     private MaterialButton lireImage;
+    private MaterialButton pageAnalyse;
     private ShapeableImageView imagePrise;
     private EditText texteReconnue;
 
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         lireImage = findViewById(R.id.lireImage);
         imagePrise = findViewById(R.id.imagePrise);
         texteReconnue = findViewById(R.id.texteReconnue);
+        pageAnalyse = findViewById(R.id.pageAnalyse);
 
         //init liste
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -96,6 +98,21 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Veuillez selectionner une image", Toast.LENGTH_SHORT).show();
                 }else{
                     lireImage();
+                }
+            }
+        });
+
+        pageAnalyse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(texteReconnue.getText().toString().isEmpty()){
+                    Toast.makeText(MainActivity.this, "Veuillez lire l'image", Toast.LENGTH_SHORT).show();
+                }else{
+                    Log.d(TAG, "onClick: page analyse");
+                    Intent intent = new Intent(MainActivity.this, PageAnalyse.class);
+                    intent.putExtra("texte", texteReconnue.getText().toString());
+                    startActivity(intent);
+
                 }
             }
         });
