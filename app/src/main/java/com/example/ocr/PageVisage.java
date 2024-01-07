@@ -1,6 +1,7 @@
 package com.example.ocr;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.face.Face;
@@ -32,16 +35,24 @@ import java.util.List;
 public class PageVisage extends AppCompatActivity {
     private InputImage inputImage;
     private ShapeableImageView image;
-    private EditText imageType;
+    private MaterialButton retourMenu;
     private ProgressDialog progressDialog;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visage);
         image = findViewById(R.id.image);
-        imageType = findViewById(R.id.imageType);
+        retourMenu = findViewById(R.id.retourMenu);
         image.setImageURI(getIntent().getParcelableExtra("imageUri"));
         trouverVisage();
+
+        retourMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PageVisage.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void trouverVisage() {

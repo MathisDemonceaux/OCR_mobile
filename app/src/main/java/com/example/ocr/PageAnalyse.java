@@ -1,12 +1,16 @@
 package com.example.ocr;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.button.MaterialButton;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -18,6 +22,7 @@ public class PageAnalyse extends AppCompatActivity {
     private EditText magasinReconnue;
     private EditText total;
     private EditText texte;
+    private MaterialButton retourMenu;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -27,7 +32,16 @@ public class PageAnalyse extends AppCompatActivity {
         magasinReconnue = findViewById(R.id.magasinReconnue);
         total = findViewById(R.id.total);
         texte = findViewById(R.id.texte);
+        retourMenu = findViewById(R.id.retourMenu);
         texte.setText(getIntent().getStringExtra("texte"));
+
+        retourMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PageAnalyse.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         trouverMagasin();
         trouverTotal();
     }

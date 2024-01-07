@@ -1,7 +1,9 @@
 package com.example.ocr;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -9,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.label.ImageLabel;
@@ -23,6 +26,7 @@ public class PageEtiquette  extends AppCompatActivity {
     private EditText imageType;
     private ShapeableImageView image;
     private InputImage inputImage;
+    private MaterialButton retourMenu;
 
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,16 @@ public class PageEtiquette  extends AppCompatActivity {
         setContentView(R.layout.activity_etiquette);
         imageType = findViewById(R.id.imageType);
         image = findViewById(R.id.image);
+        retourMenu = findViewById(R.id.retourMenu);
         image.setImageURI(getIntent().getParcelableExtra("imageUri"));
+
+        retourMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PageEtiquette.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         try {
             classifierImage();
         } catch (IOException e) {
