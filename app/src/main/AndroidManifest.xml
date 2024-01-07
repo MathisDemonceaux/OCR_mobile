@@ -28,6 +28,8 @@
         <activity android:name=".PageAnalyse">
             </activity>
         <activity android:name=".PageEtiquette">
+        </activity>
+        <activity android:name=".PageVisage">
 
         </activity>
         <provider

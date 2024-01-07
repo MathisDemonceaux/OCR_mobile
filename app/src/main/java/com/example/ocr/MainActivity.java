@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private MaterialButton imageEntree;
     private MaterialButton lireImage;
     private MaterialButton labeliserImage;
+    private MaterialButton visage;
     private ShapeableImageView imagePrise;
 
     private static final String TAG = "Main_TAG";
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         lireImage = findViewById(R.id.lireImage);
         imagePrise = findViewById(R.id.imagePrise);
         labeliserImage = findViewById(R.id.labeliserImage);
+        visage = findViewById(R.id.visage);
 
         //init liste
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -117,6 +119,19 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
 
+            }
+        });
+
+        visage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(imageUri == null){
+                    Toast.makeText(MainActivity.this, "Veuillez selectionner une image", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(MainActivity.this, PageVisage.class);
+                    intent.putExtra("imageUri", imageUri);
+                    startActivity(intent);
+                }
             }
         });
     }
