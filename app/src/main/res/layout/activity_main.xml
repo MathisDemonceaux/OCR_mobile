@@ -14,9 +14,9 @@
         android:orientation="horizontal">
         <com.google.android.material.button.MaterialButton
             android:id="@+id/imageEntree"
-            android:text="Prendre Photo"
-            app:cornerRadius="5dp"
-            android:layout_marginEnd="5dp"
+            android:text="Photo"
+            app:cornerRadius="2dp"
+            android:layout_marginEnd="0dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
@@ -24,26 +24,26 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/lireImage"
             android:layout_width="match_parent"
-            app:cornerRadius="5dp"
-            android:layout_marginStart="5dp"
+            app:cornerRadius="2dp"
+            android:layout_marginStart="0dp"
             android:layout_weight="1"
-            android:text="Lire Ticket Caisse"
+            android:text="Ticket Caisse"
             android:layout_height="match_parent"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/labeliserImage"
             android:layout_width="match_parent"
-            app:cornerRadius="5dp"
-            android:layout_marginStart="5dp"
+            app:cornerRadius="2dp"
+            android:layout_marginStart="0dp"
             android:layout_weight="1"
-            android:text="Labeliser Image"
+            android:text="Label"
             android:layout_height="match_parent"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/visage"
             android:layout_width="match_parent"
-            app:cornerRadius="5dp"
-            android:layout_marginStart="5dp"
+            app:cornerRadius="2dp"
+            android:layout_marginStart="0dp"
             android:layout_weight="1"
             android:text="Visage"
             android:layout_height="match_parent"/>

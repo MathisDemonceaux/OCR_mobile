@@ -126,7 +126,7 @@ public class PageVisage extends AppCompatActivity {
 
                 for (Contour contour : contours) {
                     for (PointF point : contour.point) {
-                        canvas.drawCircle(point.x, point.y, 5, contour.couleur);
+                        canvas.drawCircle(point.x, point.y, 12, contour.couleur);
                     }
                 }
 

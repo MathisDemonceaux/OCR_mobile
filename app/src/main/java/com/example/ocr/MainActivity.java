@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "onClick: page analyse");
                     Intent intent = new Intent(MainActivity.this, PageAnalyse.class);
                     intent.putExtra("texte", result);
+                    intent.putExtra("imageUri", imageUri);
                     startActivity(intent);
 
                 }

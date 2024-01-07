@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -24,6 +25,8 @@ public class PageAnalyse extends AppCompatActivity {
     private EditText texte;
     private MaterialButton retourMenu;
 
+    private ShapeableImageView image;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class PageAnalyse extends AppCompatActivity {
         total = findViewById(R.id.total);
         texte = findViewById(R.id.texte);
         retourMenu = findViewById(R.id.retourMenu);
+        image = findViewById(R.id.image);
+        image.setImageURI(getIntent().getParcelableExtra("imageUri"));
         texte.setText(getIntent().getStringExtra("texte"));
 
         retourMenu.setOnClickListener(new View.OnClickListener() {
